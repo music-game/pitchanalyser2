@@ -24,11 +24,11 @@ const noteWidth = timePerNote * ppms;
 const noteHeight = 16;
 
 //canvas/animation variables
-var staffCanvas, gameCanvas, scopeCanvas, canvasWidth, dpr;
+var staffCanvas, gameCanvas, scopeCanvas, freqCanvas, canvasWidth, dpr;
 var myAniReq = null;
 
 //jquery variables
-var $score, $progress, $staff, $game, $board, $scope, $startgame, $newgame, $stopgame, $resettab, $customtab;
+var $score, $progress, $staff, $game, $board, $scope, $startgame, $newgame, $stopgame, $resettab, $customtab, $freqscope;
 var $notesel, $debuginfo, $newtab, $settingstab, $helptab, $showsettings, $scorelist, $levelgrid;
 
 //variables for audiocontext and playing tones
@@ -74,6 +74,7 @@ $(document).ready(function () {
   $staff = $("#staff");
   $game = $("#game");
   $scope = $("#scope");
+  $freqscope = $("#freq");
   $board = $(".board");
   $score = $(".score");
   $progress = $(".progress");
@@ -110,6 +111,12 @@ $(document).ready(function () {
   $scope[0].style.height = scopeHeight + "px";
   scopeCanvas = $scope[0].getContext("2d");
   scopeCanvas.scale(dpr, dpr);
+  $freqscope[0].width = canvasWidth * dpr;
+  $freqscope[0].height = scopeHeight * dpr;
+  $freqscope[0].style.width = canvasWidth + "px";
+  $freqscope[0].style.height = scopeHeight + "px";
+  freqCanvas = $freqscope[0].getContext("2d");
+  freqCanvas.scale(dpr, dpr);
 
   gameCanvas = $game[0].getContext("2d");
   gameCanvas.scale(dpr, dpr);

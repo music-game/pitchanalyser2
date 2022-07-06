@@ -50,6 +50,7 @@ function AMDF(params) {
         amd[i] = summation;
       }
     }
+
     for (j = minPeriod; j < maxPeriod; j++) {
       if (amd[j] < minval) minval = amd[j];
       if (amd[j] > maxval) maxval = amd[j];
@@ -65,6 +66,31 @@ function AMDF(params) {
         minpos = i;
       }
     }
+    //Draw scope
+    let scale = scopeHeight / maxval;
+    let multiple = Math.ceil(amd.length / canvasWidth);
+    console.log(multiple);
+    freqCanvas.clearRect(0, 0, canvasWidth, scopeHeight);
+    freqCanvas.beginPath();
+    freqCanvas.lineWidth = 1;
+    freqCanvas.strokeStyle = "red";
+
+    freqCanvas.moveTo(0, scopeHeight);
+    freqCanvas.lineTo(canvasWidth, scopeHeight);
+    freqCanvas.stroke();
+    freqCanvas.moveTo(0, scopeHeight - scale * cutoff);
+    freqCanvas.lineTo(canvasWidth, scopeHeight - scale * cutoff);
+    freqCanvas.stroke();
+
+    freqCanvas.lineWidth = 1;
+    freqCanvas.strokeStyle = "black";
+    freqCanvas.moveTo(0, 0);
+    freqCanvas.beginPath();
+    for (let i = 0; i < amd.length / multiple; i++) {
+      freqCanvas.lineTo(i, scopeHeight - scale * amd[i * multiple]);
+    }
+    freqCanvas.stroke();
+
     if (Math.round(amd[minpos] * ratio) < maxval) {
       return sampleRate / minpos;
     } else {
