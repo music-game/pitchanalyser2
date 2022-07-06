@@ -654,9 +654,9 @@ async function getMedia() {
       audioContext = new AudioContext();
 
       let devices = await navigator.mediaDevices.enumerateDevices();
+      console.log(devices);
       for (let i = 0; i < devices.length; i++) {
         if (devices[i].kind == "audioinput") {
-          console.log(devices[i].label);
           $debuginfo.append("<p>" + devices[i].label + "</p>");
         }
       }
