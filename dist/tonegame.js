@@ -677,6 +677,7 @@ async function getMedia() {
         audio: {
           autoGainControl: { exact: false },
           noiseSuppression: { exact: false },
+          echoCancellation: { exact: false },
           // mandatory: {
           //   googEchoCancellation: "false",
           //   googAutoGainControl: "false",
