@@ -659,7 +659,7 @@ async function getMedia() {
       });
 
       let preferedID = "default";
-      let preferedLabel = "asdf";
+      let preferedLabel = "headset";
 
       let devices = await navigator.mediaDevices.enumerateDevices();
       console.log(devices);
@@ -673,18 +673,11 @@ async function getMedia() {
       }
 
       stream = await navigator.mediaDevices.getUserMedia({
-        // audio: { deviceId: preferedID, autoGainControl: false, echoCancellation: false, noiseSuppression: false },
         audio: {
+          deviceId: preferedID,
           autoGainControl: { exact: false },
           noiseSuppression: { exact: false },
           echoCancellation: { exact: false },
-          // mandatory: {
-          //   googEchoCancellation: "false",
-          //   googAutoGainControl: "false",
-          //   googNoiseSuppression: "false",
-          //   googHighpassFilter: "false",
-          // },
-          // optional: [],
         },
         video: false,
       });
