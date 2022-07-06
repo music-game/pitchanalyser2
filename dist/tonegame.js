@@ -653,6 +653,11 @@ async function getMedia() {
     try {
       audioContext = new AudioContext();
 
+      stream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: false,
+      });
+
       let devices = await navigator.mediaDevices.enumerateDevices();
       console.log(devices);
       for (let i = 0; i < devices.length; i++) {
@@ -665,6 +670,7 @@ async function getMedia() {
         audio: true,
         video: false,
       });
+
       // Create an AudioNode from the stream.
       mediaStreamSource = audioContext.createMediaStreamSource(stream);
       sampleRate = audioContext.sampleRate;
