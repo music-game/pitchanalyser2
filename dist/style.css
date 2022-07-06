@@ -1,0 +1,280 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(240, 240, 240);
+  color: rgb(32, 32, 32);
+  margin: 0;
+  overflow-y: auto;
+  padding: 0;
+  font-family: helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+button {
+  background: white;
+  border: 2px solid #000;
+  border-radius: 10px;
+  color: inherit;
+  padding: 5px 10px;
+  font: inherit;
+  font-size: 16px;
+  height: 40px;
+  text-align: center;
+  display: block;
+  margin: auto;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+button:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+button[disabled] {
+  border-color: rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.15);
+}
+button.showsettings,
+button.showhelp {
+  border-radius: 20px;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  font-size: 20px;
+  margin: 0;
+}
+
+button.active {
+  background: grey;
+}
+button.inactive {
+  background: white;
+}
+
+svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.board {
+  width: 800px;
+  height: 665px;
+  /* border: 1px solid #000; */
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container {
+  width: 100%;
+  height: 500px;
+  background: white;
+}
+
+.titlebar {
+  display: flex;
+  justify-content: space-between;
+  width: min(95%);
+  height: auto;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Righteous", fantasy;
+  /* font-family: Charcoal, fantasy; */
+  font-weight: 100;
+  font-size: 30px;
+  height: 40px;
+}
+.subtitle {
+  text-align: center;
+  font: inherit;
+  font-size: 20px;
+  padding: 5px;
+}
+.debuginfo {
+  position: absolute;
+  left: 5%;
+  top: 60px;
+}
+
+.setup {
+  display: flex;
+  justify-content: space-between;
+  width: min(360px, 85%);
+  height: auto;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.infobox {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  height: 45px;
+  border: 3px solid black;
+  border-radius: 8px;
+  text-align: center;
+  padding: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2px;
+  margin-bottom: 10px;
+  font: inherit;
+}
+.infotxt {
+  text-align: right;
+  padding: 5px;
+  height: 35px;
+}
+.infoval {
+  width: 70px;
+  text-align: center;
+  padding: 5px;
+  height: 35px;
+}
+
+canvas#game {
+  display: block;
+  position: relative;
+  top: -500px;
+  z-index: 3;
+}
+
+canvas#staff {
+  display: block;
+  position: relative;
+  top: 0;
+  z-index: 2;
+  opacity: 1;
+}
+
+.newtab,
+.settingstab,
+.helptab {
+  position: absolute;
+  overflow: auto;
+  top: 330px;
+  left: 50%;
+  width: min(500px, 90%);
+  height: 635px;
+  transform: translate(-50%, -50%);
+  background-color: rgb(194, 194, 194);
+  z-index: 100;
+  border: 3px solid black;
+  border-radius: 8px;
+  text-align: center;
+  padding: 20px;
+  font: inherit;
+}
+::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+::-webkit-scrollbar-track {
+  background: grey; /* color of the tracking area */
+}
+::-webkit-scrollbar-thumb {
+  background-color: white; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid black; /* creates padding around scroll thumb */
+}
+* {
+  /* for firefox */
+  scrollbar-width: thin;
+  scrollbar-color: black grey;
+}
+
+.columngrid {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.columndata {
+  width: 50%;
+  display: flexbox;
+  flex-direction: column;
+}
+.narrowcolumn {
+  width: 35%;
+  display: flexbox;
+  flex-direction: column;
+  padding: 0px 10px 0px 10px;
+}
+.widecolumn {
+  width: 65%;
+  display: flexbox;
+  flex-direction: column;
+}
+
+.levelsel {
+  width: min(80%, 150px);
+}
+.bestscore {
+  width: min(80%, 150px);
+  height: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.buttonbar {
+  display: flex;
+  width: min(250px, 85%);
+  height: auto;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.settingtext {
+  height: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+.paragraph {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+.paragraph.left {
+  text-align: left;
+}
+.paragraph.center {
+  text-align: center;
+}
+select {
+  width: 90%;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  border: 1px solid #ccc;
+  height: 40px;
+}
