@@ -673,12 +673,21 @@ async function getMedia() {
       }
 
       stream = await navigator.mediaDevices.getUserMedia({
-        audio: { deviceId: preferedID, autoGainControl: false, echoCancellation: false, noiseSuppression: false },
+        // audio: { deviceId: preferedID, autoGainControl: false, echoCancellation: false, noiseSuppression: false },
+        audio: {
+          mandatory: {
+            googEchoCancellation: "false",
+            googAutoGainControl: "false",
+            googNoiseSuppression: "false",
+            googHighpassFilter: "false",
+          },
+          optional: [],
+        },
         video: false,
       });
 
       console.log("connected to: " + stream.getAudioTracks()[0].label);
-      console.log("properties: " + stream.getAudioTracks()[0].getConstraints);
+      console.log("properties: " + stream.getAudioTracks()[0].getConstraints());
       $debuginfo.append("<p>connected to: " + stream.getAudioTracks()[0].label + "</p>");
 
       // Create an AudioNode from the stream.
