@@ -675,13 +675,15 @@ async function getMedia() {
       stream = await navigator.mediaDevices.getUserMedia({
         // audio: { deviceId: preferedID, autoGainControl: false, echoCancellation: false, noiseSuppression: false },
         audio: {
-          mandatory: {
-            googEchoCancellation: "false",
-            googAutoGainControl: "false",
-            googNoiseSuppression: "false",
-            googHighpassFilter: "false",
-          },
-          optional: [],
+          autoGainControl: { exact: false },
+          noiseSuppression: { exact: false },
+          // mandatory: {
+          //   googEchoCancellation: "false",
+          //   googAutoGainControl: "false",
+          //   googNoiseSuppression: "false",
+          //   googHighpassFilter: "false",
+          // },
+          // optional: [],
         },
         video: false,
       });
