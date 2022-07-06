@@ -69,7 +69,6 @@ function AMDF(params) {
     //Draw scope
     let scale = scopeHeight / maxval;
     let multiple = Math.ceil(amd.length / canvasWidth);
-    console.log(multiple);
     freqCanvas.clearRect(0, 0, canvasWidth, scopeHeight);
     freqCanvas.beginPath();
     freqCanvas.lineWidth = 1;

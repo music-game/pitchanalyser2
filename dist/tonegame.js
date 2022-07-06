@@ -268,7 +268,7 @@ function renderFrame() {
     let noteScaled = null;
     if (pitchArray.length > 0) {
       let myPitch = calcAvgPitch();
-      if (DEBUG) $debuginfo.html(noteNameFromNum(Math.round(myPitch)));
+      // if (DEBUG) $debuginfo.html(noteNameFromNum(Math.round(myPitch)));
       noteScaled = canvasHeight - 10 - (myPitch - tonic + 12) * rowHeight;
       arrowPosition = Math.min(Math.max(noteScaled, 0), canvasHeight); //clip to available canvas
       //arrow Position only updates if pitchArray is not empty
@@ -652,6 +652,15 @@ async function getMedia() {
   if (stream == null) {
     try {
       audioContext = new AudioContext();
+
+      let devices = await navigator.mediaDevices.enumerateDevices();
+      for (let i = 0; i < devices.length; i++) {
+        if (devices[i].kind == "audioinput") {
+          console.log(devices[i].label);
+          $debuginfo.append("<p>" + devices[i].label + "</p>");
+        }
+      }
+
       stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
         video: false,
@@ -755,7 +764,6 @@ function updatePitch() {
 
   //Draw scope
   let multiple = Math.ceil(array32.length / canvasWidth);
-  console.log(multiple);
   scopeCanvas.clearRect(0, 0, canvasWidth, scopeHeight);
   scopeCanvas.beginPath();
   scopeCanvas.lineWidth = 1;
