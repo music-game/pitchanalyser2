@@ -315,6 +315,7 @@ function renderFrame() {
     let xdata_shift = xdata.map((x) => x - dt * ppms);
     let drawing = false;
     gameCanvas.lineWidth = 3;
+    gameCanvas.lineJoin = "round";
     gameCanvas.beginPath();
     for (let i = 0; i < xdata_shift.length; i++) {
       if (ydata[i] == null) {
