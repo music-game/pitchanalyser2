@@ -41,7 +41,7 @@ var piano = null;
 const noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 //pitch variables
-const pitchAvgLength = 5;
+const pitchAvgLength = 1;
 var pitchArray = [];
 var arrowPosition = 250; //position of the arrow at start of game. Updates as game is played
 const pitchFoundThresh = 5; //how many samples have to be null before we consider no pitch found
