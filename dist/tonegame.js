@@ -41,7 +41,7 @@ var piano = null;
 const noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 //pitch variables
-const pitchAvgLength = 1;
+const pitchAvgLength = 5;
 var pitchArray = [];
 var arrowPosition = 250; //position of the arrow at start of game. Updates as game is played
 const pitchFoundThresh = 5; //how many samples have to be null before we consider no pitch found
@@ -805,21 +805,38 @@ function updatePitch() {
 
 function calcAvgPitch() {
   let myPitch = 0;
-  var total = 0;
-  var minval = Infinity;
-  var maxval = -Infinity;
-  for (var i = 0; i < pitchArray.length; i++) {
-    tempval = pitchArray[i];
-    total += tempval;
-    if (tempval < minval) minval = tempval;
-    if (tempval > maxval) maxval = tempval;
+  let jump = 0;
+  let len = pitchArray.length;
+  var minval = 15; //minimum jump
+  var maxval = -15; //maximum jump
+  for (var i = 1; i < len; i++) {
+    jump = pitchArray[i] - pitchArray[i - 1];
+    if (jump < minval) minval = jump;
+    if (jump > maxval) maxval = jump;
   }
-  if (pitchArray.length < pitchAvgLength) {
-    myPitch = total / pitchArray.length;
+  //if pitch isn't changing much, then use latest value
+  if (maxval - minval < 5) {
+    myPitch = pitchArray[len - 1];
   } else {
-    myPitch = (total - minval - maxval) / (pitchArray.length - 2);
+    console.log("jumpy");
+    //if it is jumpy, then use the median of the values
+    myPitch = median(pitchArray);
   }
   return myPitch;
+
+  function median(values) {
+    if (values.length === 0) throw new Error("No inputs");
+
+    values.sort(function (a, b) {
+      return a - b;
+    });
+
+    var half = Math.floor(values.length / 2);
+
+    if (values.length % 2) return values[half];
+
+    return (values[half - 1] + values[half]) / 2.0;
+  }
 }
 
 function drawStaff() {
