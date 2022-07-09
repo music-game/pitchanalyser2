@@ -46,6 +46,7 @@ var pitchArray = [];
 var arrowPosition = 250; //position of the arrow at start of game. Updates as game is played
 const pitchFoundThresh = 5; //how many samples have to be null before we consider no pitch found
 var pitchFound = 0; //countdown until we consider no pitch found (resets to pitchFoundThresh when detected)
+var myPitch = 0; //tracks the current pitch
 
 //song variables
 var notes = []; //8=tonic
@@ -267,7 +268,7 @@ function renderFrame() {
     //calculate current pitch
     let noteScaled = null;
     if (pitchArray.length > 0) {
-      let myPitch = calcAvgPitch();
+      calcAvgPitch();
       // if (DEBUG) $debuginfo.html(noteNameFromNum(Math.round(myPitch)));
       noteScaled = canvasHeight - 10 - (myPitch - tonic + 12) * rowHeight;
       arrowPosition = Math.min(Math.max(noteScaled, 0), canvasHeight); //clip to available canvas
@@ -804,7 +805,6 @@ function updatePitch() {
 }
 
 function calcAvgPitch() {
-  let myPitch = 0;
   let jump = 0;
   let len = pitchArray.length;
   var minval = 15; //minimum jump
@@ -818,24 +818,8 @@ function calcAvgPitch() {
   if (maxval - minval < 5) {
     myPitch = pitchArray[len - 1];
   } else {
-    console.log("jumpy");
-    //if it is jumpy, then use the median of the values
-    myPitch = median(pitchArray);
-  }
-  return myPitch;
-
-  function median(values) {
-    if (values.length === 0) throw new Error("No inputs");
-
-    values.sort(function (a, b) {
-      return a - b;
-    });
-
-    var half = Math.floor(values.length / 2);
-
-    if (values.length % 2) return values[half];
-
-    return (values[half - 1] + values[half]) / 2.0;
+    console.log("jumpy: " + pitchArray);
+    //if it is jumpy, then hold previous value until jumping stops
   }
 }
 
