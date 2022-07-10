@@ -655,31 +655,31 @@ async function getMedia() {
     try {
       audioContext = new AudioContext();
 
-      stream = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-        video: false,
-      });
+      // stream = await navigator.mediaDevices.getUserMedia({
+      //   audio: true,
+      //   video: false,
+      // });
 
-      let preferedID = "default";
-      let preferedLabel = "headset";
+      // let preferedID = "default";
+      // let preferedLabel = "headset";
 
-      let devices = await navigator.mediaDevices.enumerateDevices();
-      console.log(devices);
-      for (let i = 0; i < devices.length; i++) {
-        if (devices[i].kind == "audioinput") {
-          $debuginfo.append("<p>" + devices[i].label + "</p>");
-          if (devices[i].label.includes(preferedLabel)) {
-            preferedID = devices[i].deviceId;
-          }
-        }
-      }
+      // let devices = await navigator.mediaDevices.enumerateDevices();
+      // console.log(devices);
+      // for (let i = 0; i < devices.length; i++) {
+      //   if (devices[i].kind == "audioinput") {
+      //     $debuginfo.append("<p>" + devices[i].label + "</p>");
+      //     if (devices[i].label.includes(preferedLabel)) {
+      //       preferedID = devices[i].deviceId;
+      //     }
+      //   }
+      // }
 
       stream = await navigator.mediaDevices.getUserMedia({
         audio: {
-          deviceId: preferedID,
-          autoGainControl: { exact: false },
-          noiseSuppression: { exact: false },
-          echoCancellation: { exact: false },
+          // deviceId: preferedID,
+          autoGainControl: false,
+          noiseSuppression: false,
+          echoCancellation: false,
         },
         video: false,
       });
